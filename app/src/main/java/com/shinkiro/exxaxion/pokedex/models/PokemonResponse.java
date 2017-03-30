@@ -1,6 +1,6 @@
 package com.shinkiro.exxaxion.pokedex.models;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Exxaxion on 24/03/2017.
@@ -8,13 +8,9 @@ import java.util.ArrayList;
 
 public class PokemonResponse {
 
-    private ArrayList<Pokemon> results;
+    private List<Pokemon> results;
 
-    public ArrayList<Pokemon> getResults() {
+    public List<Pokemon> getResults() {
         return results;
-    }
-
-    public void setResults(ArrayList<Pokemon> results) {
-        this.results = results;
     }
 }
