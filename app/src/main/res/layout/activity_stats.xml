@@ -4,20 +4,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/colors_gradient">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/pokemonName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:gravity="center_horizontal"
-            android:text="pokemon"
+            android:text="@string/pokemon"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="20dp"
@@ -27,8 +25,7 @@
             android:id="@+id/pokemonNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/pokemonName"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:text="Pokemon N° "
             android:textColor="@color/white" />
 
@@ -36,164 +33,15 @@
             android:id="@+id/pokemonImage"
             android:layout_width="196dp"
             android:layout_height="196dp"
-            android:layout_below="@+id/pokemonNumber"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="14dp" />
 
-        <TextView
-            android:id="@+id/typeText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/pokemonImage"
-            android:layout_marginTop="32dp"
-            android:text="Type :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tableLayout"
+            android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/type"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/typeText"
-            android:layout_alignBottom="@+id/typeText"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:text="PokemonType"
-            android:textColor="@color/white" />
 
-        <TextView
-            android:id="@+id/hpText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/hp"
-            android:layout_alignBottom="@+id/hp"
-            android:layout_alignParentStart="true"
-            android:text="HP :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/hp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/type"
-            android:layout_gravity="right"
-            android:layout_marginTop="15dp"
-            android:text="PokemonHP"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/attackText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/hpText"
-            android:layout_marginTop="15dp"
-            android:text="Attack :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/attack"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/attackText"
-            android:layout_alignBottom="@+id/attackText"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:text="PokemonAttack"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/defenseText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/attackText"
-            android:layout_marginTop="15dp"
-            android:text="Defense :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/defense"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/defenseText"
-            android:layout_alignBottom="@+id/defenseText"
-            android:layout_alignStart="@+id/attack"
-            android:layout_gravity="right"
-            android:text="PokemonDefense"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/speedText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/defenseText"
-            android:layout_marginTop="15dp"
-            android:text="Speed :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/speed"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/speedText"
-            android:layout_alignBottom="@+id/speedText"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:text="PokemonSpeed"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/specialattackText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/speedText"
-            android:layout_marginTop="15dp"
-            android:text="Special Attack :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/specialattack"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/specialattackText"
-            android:layout_alignBottom="@+id/specialattackText"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:text="PokemonSpAtk"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/specialdefenseText"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/specialattackText"
-            android:layout_marginTop="15dp"
-            android:text="Special Defense :"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/specialdefense"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/specialdefenseText"
-            android:layout_alignBottom="@+id/specialdefenseText"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:text="PokemonSpDef"
-            android:textColor="@color/white" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

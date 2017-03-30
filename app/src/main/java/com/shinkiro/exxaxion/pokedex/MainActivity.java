@@ -1,19 +1,22 @@
 package com.shinkiro.exxaxion.pokedex;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import com.shinkiro.exxaxion.pokedex.models.Pokemon;
 import com.shinkiro.exxaxion.pokedex.models.PokemonResponse;
-import com.shinkiro.exxaxion.pokedex.pokeapi.PokeapiService;
-import java.util.ArrayList;
+import com.shinkiro.exxaxion.pokedex.pokeapi.PokeapiEndPoint;
+
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.shinkiro.exxaxion.pokedex.PokeApplication.POKE_ENDPOINT;
 
 /**
  * Created by Exxaxion on 24/03/2017.
@@ -22,21 +25,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "POKEDEX";
-    private static final String BASE_URL = "https://pokeapi.co/api/v2/";
 
-    private Retrofit retrofit;
-
-    private RecyclerView recyclerView;
     private ListPokemonAdapter listPokemonAdapter;
     private int offset;
     private boolean ableToLoad;
+    private PokeapiEndPoint pokeEndPoint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        pokeEndPoint = (PokeapiEndPoint) getApplication().getSystemService(POKE_ENDPOINT);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         listPokemonAdapter = new ListPokemonAdapter(this);
         recyclerView.setAdapter(listPokemonAdapter);
         recyclerView.setHasFixedSize(true);
@@ -59,27 +61,22 @@ public class MainActivity extends AppCompatActivity {
 
                             ableToLoad = false;
                             offset += 20;
-                            obtenerData(offset);
+                            listPokemons(offset);
                         }
                     }
                 }
             }
         });
 
-        retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         ableToLoad = true;
         offset = 0;
-        obtenerData(offset);
+        listPokemons(offset);
 
     }
 
-    private void obtenerData(final int offset) {
-        PokeapiService service = retrofit.create(PokeapiService.class);
-        Call<PokemonResponse> pokemonResponseCall = service.obtenerListPokemon(20, offset);
+    private void listPokemons(final int offset) {
+
+        Call<PokemonResponse> pokemonResponseCall = pokeEndPoint.listPokemons(20, offset);
 
         pokemonResponseCall.enqueue(new Callback<PokemonResponse>() {
             @Override
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
 
                     final PokemonResponse pokemonResponse = response.body();
-                    final ArrayList<Pokemon> listPokemon = pokemonResponse.getResults();
+                    final List<Pokemon> listPokemon = pokemonResponse.getResults();
 
                     listPokemonAdapter.addListPokemon(listPokemon);
 
@@ -104,6 +101,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
 }

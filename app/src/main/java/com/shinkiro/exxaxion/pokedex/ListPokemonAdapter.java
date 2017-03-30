@@ -8,16 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.shinkiro.exxaxion.pokedex.models.Pokemon;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Exxaxion on 24/03/2017.
  */
 
-public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.ViewHolder>{
+public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.ViewHolder> {
 
 
     public static ArrayList<Pokemon> dataset;
@@ -39,10 +42,8 @@ public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.
         Pokemon p = dataset.get(position);
         holder.pokemonTextView.setText(p.getName());
 
-        final String imgPokemon = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + p.getNumber() + ".png";
-
         Glide.with(context)
-                .load(imgPokemon)
+                .load(p.getImageUrl())
                 .centerCrop()
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -52,11 +53,8 @@ public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, PokemonStatsActivity.class);
-                intent.putExtra("SOME_ID", position);
-                intent.putExtra("NAME", dataset.get(position));
-                intent.putExtra(PokemonStatsActivity.IMG_URL, imgPokemon);
 
+                Intent intent = PokemonStatsActivity.newIntent(context, dataset.get(position));
                 context.startActivity(intent);
             }
         });
@@ -67,12 +65,12 @@ public class ListPokemonAdapter extends RecyclerView.Adapter<ListPokemonAdapter.
         return dataset.size();
     }
 
-    public void addListPokemon(ArrayList<Pokemon> listPokemon) {
+    public void addListPokemon(List<Pokemon> listPokemon) {
         dataset.addAll(listPokemon);
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View parent;
         private ImageView pictureImageView;

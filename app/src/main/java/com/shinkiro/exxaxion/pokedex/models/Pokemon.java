@@ -1,6 +1,7 @@
 package com.shinkiro.exxaxion.pokedex.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by Exxaxion on 24/03/2017.
@@ -8,33 +9,25 @@ import java.io.Serializable;
 
 public class Pokemon implements Serializable {
 
-    private int number;
     private String name;
     private String url;
-
+    private List<PokemonStats> stats;
+    final String imgPokemon = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/";
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getImageUrl() {
+        return imgPokemon + getId() + ".png";
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public int getNumber() {
+    public String getId() {
         String[] urlParts = url.split("/");
-        return Integer.parseInt(urlParts[urlParts.length-1]);
+        return urlParts[urlParts.length - 1];
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public List<PokemonStats> getStats() {
+        return stats;
     }
 }
